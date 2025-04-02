@@ -50,36 +50,38 @@ export default function Page() {
       <h1 className="text-center text-5xl font-extrabold text-gray-900 mb-6">Messages Filter</h1>
       <LaunchWhatsappChromeSession loginStatus={loginStatus} setLoginStatus={setLoginStatus} />
       <ReloadButton />
-      <button
-        className="bg-blue-600 text-white rounded-full py-2 px-5 hover:bg-blue-700 transition-all shadow-lg"
-        onClick={() => {
-          setLoading(true);
-          fetch("/api/readmsg")
-            .then(res => res.json())
-            .then(data => {
-              setMessageData(data.classifications);
-              localStorage.setItem("messageData", messageData);
-              setLoading(false);
-            })
-            .catch(err => {
-              console.error("Error fetching messages:", err);
-              setLoading(false);
-            });
-        }}
-      >
-        {loading ? "Loading..." : "Get Chats"}
-      </button>
-      <button
-        className="bg-blue-600 text-white rounded-full py-2 px-5 hover:bg-blue-700 transition-all shadow-lg"
-        onClick={() => {
-          fetch("/api/readchat?person=Ashokasec TwT")
-            .then(response => response.json())
-            .then(data => {
-              setFilteredContent(filteredContent.filter(msg => !selectMultiple.includes(msg.name)));
-            })
-            .catch(error => console.error('Error deleting message:', error));
-        }}
-      >Summarize a Chat</button>
+      <div className="flex mx-5">
+        <button
+          className="bg-blue-600 text-white mx-2 rounded-full py-2 px-5 hover:bg-blue-700 transition-all shadow-lg"
+          onClick={() => {
+            setLoading(true);
+            fetch("/api/readmsg")
+              .then(res => res.json())
+              .then(data => {
+                setMessageData(data.classifications);
+                localStorage.setItem("messageData", messageData);
+                setLoading(false);
+              })
+              .catch(err => {
+                console.error("Error fetching messages:", err);
+                setLoading(false);
+              });
+          }}
+        >
+          {loading ? "Loading..." : "Get Chats"}
+        </button>
+        <button
+          className="bg-blue-600 text-white rounded-full py-2 px-5 hover:bg-blue-700 transition-all shadow-lg"
+          onClick={() => {
+            fetch("/api/readchat?person=Ashokasec TwT")
+              .then(response => response.json())
+              .then(data => {
+                setFilteredContent(filteredContent.filter(msg => !selectMultiple.includes(msg.name)));
+              })
+              .catch(error => console.error('Error deleting message:', error));
+          }}
+        >Summarize a Chat</button>
+      </div>
 
       <div className="grid grid-cols-2 gap-5 mt-8 w-full max-w-4xl">
         {typeofData.map((item, index) => {
