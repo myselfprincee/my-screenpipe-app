@@ -165,8 +165,6 @@ export function LaunchWhatsappChromeSession({ loginStatus, setLoginStatus }: Pro
 
       const isLoggedIn = data.isLoggedIn;
       setLoginStatus(isLoggedIn ? 'logged_in' : 'logged_out');
-      const msgdata = await fetch('api/readmsg')
-      console.log(msgdata)
 
       if (isLoggedIn && loginCheckInterval) {
         clearInterval(loginCheckInterval);

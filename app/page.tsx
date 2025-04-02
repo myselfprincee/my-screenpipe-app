@@ -69,6 +69,17 @@ export default function Page() {
       >
         {loading ? "Loading..." : "Get Chats"}
       </button>
+      <button
+        className="bg-blue-600 text-white rounded-full py-2 px-5 hover:bg-blue-700 transition-all shadow-lg"
+        onClick={() => {
+          fetch("/api/readchat?person=Ashokasec TwT")
+            .then(response => response.json())
+            .then(data => {
+              setFilteredContent(filteredContent.filter(msg => !selectMultiple.includes(msg.name)));
+            })
+            .catch(error => console.error('Error deleting message:', error));
+        }}
+      >Summarize a Chat</button>
 
       <div className="grid grid-cols-2 gap-5 mt-8 w-full max-w-4xl">
         {typeofData.map((item, index) => {
